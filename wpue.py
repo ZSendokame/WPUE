@@ -2,13 +2,13 @@ import requests
 import sys
 
 # Error
-get = requests.get(sys.argv[1] + '/wp-json/')
-
 if len(sys.argv) <= 1:
     print('[-] Can\'t find any argument')
     exit()
 
-elif get.status_code == 404:
+get = requests.get(sys.argv[1] + '/wp-json/')
+
+if get.status_code >= 400:
     print(f'[-] The site "{sys.argv[1]}" does not have "/wp-json/" directory or it\'s not indexable.')
     exit(1)
 
@@ -24,4 +24,7 @@ while True:
         pass
 
     else:
-        print(f'[{userCount}] Username: {json["name"]}\n- Super Admin : {json["is_super_admin"]}\n- Expanded Url: {sys.argv[1]}/wp-json/wp/v2/users/{userCount}')
+        print(f'[{userCount}] Username: {json["name"]}')
+        print(f'- User ID             : ' + str(json["id"]))
+        print(f'- Expanded Url        : {sys.argv[1]}/wp-json/wp/v2/users/{userCount}')
+        print(f'- Super Admin         : ' + str(json["is_super_admin"]))
