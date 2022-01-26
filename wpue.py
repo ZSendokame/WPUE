@@ -24,7 +24,7 @@ while True:
         pass
 
     else:
-        print(f'[{userCount}] Username: {json["name"]}')
+        print(f'[+] Username: {json["name"]}')
         print(f'- User ID             : ' + str(json["id"]))
         print(f'- Expanded Url        : {sys.argv[1]}/wp-json/wp/v2/users/{userCount}')
         print(f'- Super Admin         : ' + str(json["is_super_admin"]))
