@@ -13,18 +13,14 @@ if get.status_code >= 400:
     exit(1)
 
 # Main
-userCount = 0
+get = requests.get(f'{sys.argv[1]}/wp-json/wp/v2/users/')
+json = get.json()
 
-while True:
-    userCount += 1
-    get = requests.get(f'{sys.argv[1]}/wp-json/wp/v2/users/{userCount}')
-    json = get.json()
-
-    if get.status_code >= 400:
-        pass
-
-    else:
-        print(f'[+] Username: {json["name"]}')
-        print(f'- User ID             : ' + str(json["id"]))
-        print(f'- Expanded Url        : {sys.argv[1]}/wp-json/wp/v2/users/{userCount}')
-        print(f'- Super Admin         : ' + str(json["is_super_admin"]))
+print('_______')
+for part in json:
+    print('[+] Username  : ' + part["name"])
+    print('- User Slug   : ' + part["slug"])
+    print('- User ID     : ' + str(part["id"]))
+    print(f'- Expanded URL: {sys.argv[1]}/wp-json/wp/v2/users/{part["id"]}')
+    print('- Super Admin : ' + str(part['is_super_admin']))
+print('-------')
