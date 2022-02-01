@@ -6,10 +6,10 @@ if len(sys.argv) <= 1:
     print('[-] Can\'t find any argument')
     exit()
 
-get = requests.get(sys.argv[1] + '/wp-json/')
+get = requests.get(sys.argv[1] + '/wp-json/wp/v2/users')
 
 if get.status_code >= 400:
-    print(f'[-] The site "{sys.argv[1]}" does not have "/wp-json/" directory or it\'s not indexable.')
+    print(f'[-] The site "{sys.argv[1]}" does not have "/wp-json/wp/v2/users" directory or it\'s not indexable.')
     exit(1)
 
 # Main
@@ -22,5 +22,5 @@ for part in json:
     print('- User Slug   : ' + part["slug"])
     print('- User ID     : ' + str(part["id"]))
     print(f'- Expanded URL: {sys.argv[1]}/wp-json/wp/v2/users/{part["id"]}')
-    print('- Super Admin : ' + str(part['is_super_admin']))
+    print(f'- Super Admin : {part["is_super_admin"]}\n')
 print('-------')
