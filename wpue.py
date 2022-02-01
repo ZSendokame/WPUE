@@ -13,7 +13,6 @@ if get.status_code >= 400:
     exit(1)
 
 # Main
-get = requests.get(f'{sys.argv[1]}/wp-json/wp/v2/users/')
 json = get.json()
 
 print('_______')
