@@ -1,5 +1,6 @@
 # WPUE
-WPUE (WordPress User-Enumeration) it's a easy to use Tool to enumerate users on WordPress sites.
+WPUE (WordPress User-Enumeration) it's a easy to use Tool to do User Enumeration on WordPress.<br>
+It lets you enumerate all public users in ⚡less than 2 seconds⚡!
 
 # How-to Install
 <code>git clone https://github.com/zsendokame/WPUE; pip install requests</code><br>
