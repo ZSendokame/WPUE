@@ -4,7 +4,7 @@ import sys
 # Error
 if len(sys.argv) <= 1:
     print('[-] Can\'t find any argument')
-    exit()
+    exit(1)
 
 get = requests.get(sys.argv[1] + '/wp-json/wp/v2/users')
 
