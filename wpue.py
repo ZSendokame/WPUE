@@ -1,25 +1,24 @@
 import requests
-import sys
+import arguing
 
-sys.argv = sys.argv[1:]
+url = arguing.set('--url', mandatory=True, help_message='URL to check.')
 
 # Error
-if not len(sys.argv):
+if not len(arguing.argv):
     print('[-] Can\'t find any argument')
     exit(1)
 
-get = requests.get(sys.argv[0] + '/wp-json/wp/v2/users')
+get = requests.get(url + '/wp-json/wp/v2/users')
 
 if get.status_code >= 400:
-    print(f'[-] The site "{sys.argv[0]}" does not have "/wp-json/wp/v2/users" directory or it\'s not indexable.')
+    print(f'[-] "{url}" does not have /wp-json/ or it\'s not indexable.')
     exit(1)
 
 # Main
 print('_______')
-for part in get.json():
-    print('[+] Username  : ' + part["name"])
-    print('- User Slug   : ' + part["slug"])
-    print('- User ID     : ' + str(part["id"]))
-    print(f'- Expanded URL: {sys.argv[0]}/wp-json/wp/v2/users/{part["id"]}')
-    print(f'- Super Admin : {part["is_super_admin"]}\n')
+for user in get.json():
+    print('[+] Username  : ' + user["name"])
+    print('- User Slug   : ' + user["slug"])
+    print('- User ID     : ' + str(user["id"]))
+    print(f'- Expanded URL: {url}/wp-json/wp/v2/users/{user["id"]}\n')
 print('-------')
